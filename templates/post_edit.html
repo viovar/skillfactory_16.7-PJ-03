@@ -1,0 +1,16 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+{% if user == post.author %}
+<h1>Изменить новость</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Изменить "{{ object.name }}"?</p>
+    <input type="submit" value="Save" />
+</form>
+{%else%}
+<h1>Редактирование поста не доступно, вы можете создать свой пост <a href="{% url 'post_create' %}">Добавить новость</a> </h1>
+{%endif%}
+{% endblock content %}

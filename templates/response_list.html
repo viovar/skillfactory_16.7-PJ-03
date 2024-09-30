@@ -1,0 +1,41 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+
+<h1>Отклики</h1>
+<br><br>
+   <form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
+    {% if response_list %}
+        {% for response in response_list %}
+             <h3>Мои отклики на посты:</h3>
+            <a><b>Пост:</b></a>
+            <a href="/posts/{{ response.post_id }}" style="font-size: 20px;"><b>{{ response.post.title }}</b></a><br>
+            <span style="font-size: 12px;"><b>Автор поста:  {{ response.post.author.username }} |
+
+            <a><b>Содержание отклика:</b></a>
+            {{ response.text }}<br>
+            <span style="font-size: 12px;"><b>Автор отклика:  {{ response.author.username }}</b></span><br><br>
+
+            <td style="width: 200px"><button type="submit"><a href="{% url 'response_delete' pk=response.pk %}"> Удалить </a></button></td>
+            {% if response.status == False %}
+            <td style="width: 250px"><button type="submit"><a href="{% url 'response_accept' pk=response.pk %}">Принять</a></button> </td>
+            {% else %}
+            <td style="width: 250px">Отклик принят!</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+
+    {% else %}
+        <br><br>
+        <h2>Откликов пока нет!</h2>
+    {% endif %}
+
+
+{% endblock content %}
+
+
+

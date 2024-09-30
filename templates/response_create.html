@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<h1>Добавить Отклик</h1>
+
+{% if user.is_authenticated %}
+    <h1>Добавление отклика ...</h1>
+
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-secondary">Добавить отклик</button>
+            </form>
+    </div>
+
+{% else %}
+
+<h1>Please login to add comment ...</h1>
+
+{% endif %}
+{% endblock %}
